@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+int findMaxSumSubArray(int k, const vector<int>& arr) {
+    int maxSum = 0;
+    // TODO: Write your code here
+    int windowStart = 0;
+    int windowSum = 0;
+    int arrSize = arr.size();
+    for (int windowEnd = 0; windowEnd < arrSize; windowEnd++) {
+        windowSum += arr[windowEnd];
+        if (windowEnd >= k-1) {
+          maxSum = max(maxSum, windowSum);
+          windowSum -= arr[windowStart];
+          windowStart++;
+        }
+    }
+    return maxSum;
+}
+
+int main() {
+    vector<int> inputArray;
+    inputArray.push_back(1);
+    inputArray.push_back(3);
+    inputArray.push_back(2);
+    inputArray.push_back(6);
+    inputArray.push_back(-1);
+    inputArray.push_back(4);
+    inputArray.push_back(1);
+    inputArray.push_back(8);
+    inputArray.push_back(2);
+    int result = findMaxSumSubArray(5, inputArray);
+
+    cout << result << " " << endl;
+}
